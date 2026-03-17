@@ -2,7 +2,7 @@ name: birthdaywisher
 
 on:
   schedule:
-    - cron: "*/5 * * * *"  
+    - cron: "0 7 * * *"  
   workflow_dispatch:
 
 jobs:
@@ -13,5 +13,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run test
-        run: echo "It works 🎉"
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Python script
+        run: python main.py
